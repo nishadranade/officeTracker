@@ -1,0 +1,22 @@
+{
+  "name": "officetracker",
+  "version": "1.0.0",
+  "description": "**Operations on the Database**",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nishadranade/officeTracker.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nishadranade/officeTracker/issues"
+  },
+  "homepage": "https://github.com/nishadranade/officeTracker#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
