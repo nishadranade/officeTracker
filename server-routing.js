@@ -23,16 +23,28 @@ class Server {
       response.header('Access-Control-Allow-Headers', '*');
       next();
     });
-	this.server.use(express.json());
+
+  // Serve static pages from a particular path.
+    // Handle POST data as JSON
+    this.server.use(express.json());
+    this.server.use('/', this.router);
+    this.server.use(express.static('static'));
 
     // Android related URLs
-    this.server.post('/login', android.loginHandler.bind(this));
+    this.router.post('/login', android.loginHandler.bind(this));
     this.router.post('/checkIn', android.checkInHandler.bind(this));
     this.router.post('/checkOut', android.checkOutHandler.bind(this));
-    
 
     // this.server.get('/', android.trialHandler.bind(this));
-    this.server.get('/', web.homepageHandler.bind(this));
+    this.server.get('/home/', web.homepageHandler.bind(this));
+
+    // add employee dummy script
+    this.router.post('/addEmployee', function(req, res){
+      res.write(JSON.stringify({
+          result: "success"
+      }));
+      res.end();
+    });
   }
 }
 
