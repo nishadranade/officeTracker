@@ -1,6 +1,6 @@
 # officeTracker
 
-To set up, clone the repo, and then run - 
+To set up, clone the repo, and then run 
       **npm install**
 
 
