@@ -5,19 +5,40 @@
   </head>
   
   <div class="menu">
-    <a href="Home.html">Track</a>
-    <h3>QR Code for Rooms</h3>
-    <a href="p3.html">Employee</a>
+    <a href="Home.html">Track</a><hr>
+    <h3>QR Code for Rooms</h3><hr>
+    <a href="p3.html">Employee</a><hr>
   </div>
 
 
   <div class="main">
     <div>
-      Hello world. I wonder where this text is placed.
+      <button class="bigButton" onClick="display('addRoom')">Add Room</button>
+      <div id="addRoom">
+	<form> <!-- TODO -->
+	  <label for="rname">Enter Room Name:</label>
+	  <input type="text" name="rname">
+	  <input type="submit" value="Submit">
+	</form>
+      </div>
     </div>
     <div class="main_lower">
-      Hello world. I wonder where this text is placed.
+      <button class="bigButton" onClick="display('getQR')">Generate QR Code</button>
+      <div id="getQR">
+	<form> <!-- TODO -->
+	  <label for="rname">Select Room Name:</label>
+	  <input type="text" name="rname">
+	  <input type="submit" value="Submit">
+	</form>
+      </div>
     </div>
   </div>
+
+  <script>
+    function display(id) {
+	var x = document.getElementById(id);
+	x.style.display = (x.style.display=="none" || x.style.display=="") ? "block" : "none";
+    }
+  </script>
   
 </html>
