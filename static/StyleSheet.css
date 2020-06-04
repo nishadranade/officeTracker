@@ -56,6 +56,11 @@ h3 {
     font-size: 32px;
 }
 
+.bigButton:active {
+    background: #ddd;
+    outline: none;
+}
+
 #addEmployee {
     width: 100%;
     
