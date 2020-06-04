@@ -27,8 +27,8 @@ class Server {
 
     // Android related URLs
     this.server.post('/login', android.loginHandler.bind(this));
-    this.router.post('/checkIn', android.checkInHandler.bind(this));
-    this.router.post('/checkOut', android.checkOutHandler.bind(this));
+    this.server.post('/checkIn', android.checkInHandler.bind(this));
+    this.server.post('/checkOut', android.checkOutHandler.bind(this));
     
 
     // this.server.get('/', android.trialHandler.bind(this));

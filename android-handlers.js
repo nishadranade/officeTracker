@@ -36,7 +36,7 @@ async function loginHandler(req, res){
   res.end();
 }
 
-async function checkInHandler(request, response){
+async function checkInHandler(req, res){
   console.log("in the check-in handler");
   var username = req.body.username
   var roomID = req.body.roomId
@@ -44,7 +44,7 @@ async function checkInHandler(request, response){
   var visitID = generateID()
   var startTime = new Date()
 
-  response.write(JSON.stringify({
+  res.write(JSON.stringify({
     result: "success"
   }));
 
@@ -67,14 +67,14 @@ async function checkInHandler(request, response){
   res.end();
 }
 
-async function checkOutHandler(request, response){
+async function checkOutHandler(req, res){
   console.log("in the checkout handler");
   var username = req.body.username
   var roomID = req.body.roomId
   var db = this.db;
   var endTime = new Date()
 
-  response.write(JSON.stringify({
+  res.write(JSON.stringify({
     result: "success"
   }));
 
