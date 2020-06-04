@@ -23,9 +23,10 @@ class Server {
       response.header('Access-Control-Allow-Headers', '*');
       next();
     });
+	this.server.use(express.json());
 
     // Android related URLs
-    this.router.post('/login', android.loginHandler.bind(this));
+    this.server.post('/login', android.loginHandler.bind(this));
     this.router.post('/checkIn', android.checkInHandler.bind(this));
     this.router.post('/checkOut', android.checkOutHandler.bind(this));
     

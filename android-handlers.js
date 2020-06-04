@@ -8,6 +8,7 @@ async function loginHandler(req, res){
   var username = req.body.username;
   // check if user exists (not coded yet)
   console.log("attempt at logging in");
+  console.log(username);
   res.write(JSON.stringify({
     result: "success"
   }));
@@ -31,4 +32,7 @@ async function checkOutHandler(request, response){
   }));
 }
 
-exports.trialHandler = trialHandler
+//exports.trialHandler = trialHandler
+exports.loginHandler = loginHandler;
+exports.checkInHandler = checkInHandler;
+exports.checkOutHandler = checkOutHandler;
