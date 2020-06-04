@@ -1,5 +1,10 @@
 # officeTracker
 
+To set up, clone the repo, and then run - 
+      **npm install**
+
+
+
 **Operations on the Database** 
 
 **For Employees (from the Android App)**
