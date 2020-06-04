@@ -13,11 +13,24 @@
 
   <div class="main">
     <div>
-      Hello world. I wonder where this text is placed.
+      <button class="bigButton" onClick="display('addRoom')">Add Room</button>
+      <div id="addRoom">
+	Boo!
+      </div>
     </div>
     <div class="main_lower">
-      Hello world. I wonder where this text is placed.
+      <button class="bigButton" onClick="display('getQR')">Generate QR Code</button>
+      <div id="getQR">
+	Boo!
+      </div>
     </div>
   </div>
+
+  <script>
+    function display(id) {
+	var x = document.getElementById(id);
+	x.style.display = (x.style.display=="none" || x.style.display=="") ? "block" : "none";
+    }
+  </script>
   
 </html>
