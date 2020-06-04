@@ -1,7 +1,6 @@
 // Outputs a list of all the data in the tables of the DB
-// Change the dbName constant if not working with the backup
 const sqlite3 = require('sqlite3').verbose();
-const dbName = 'trackerDB.backup.db'
+const dbName = 'trackerDB.db'
 
 let db = new sqlite3.Database(dbName, (err) => {
   if (err) {

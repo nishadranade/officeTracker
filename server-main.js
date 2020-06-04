@@ -4,7 +4,7 @@ const Server = require('./server-routing.js');
 const sqlite3 = require('sqlite3').verbose();
 
 // connect to db
-let db = new sqlite3.Database('tracker.db', (err) => {
+let db = new sqlite3.Database('trackerDB.db', (err) => {
   if (err) {
     console.error(err.message);
   }

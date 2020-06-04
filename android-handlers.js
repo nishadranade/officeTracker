@@ -39,30 +39,42 @@ async function loginHandler(req, res){
 async function checkInHandler(request, response){
   console.log("in the check-in handler");
   var username = req.body.username
-  var roomID = req.body.roomId
+  var qrCode = req.body.roomId
   var db = this.db;
   var visitID = generateID()
   var startTime = new Date()
 
-  response.write(JSON.stringify({
-    result: "success"
-  }));
+  let sql = `SELECT roomID id FROM rooms where qrCode = ?`;
+  db.get(sql, [qrCode], (err, row) => {
+    if (err) {
+  	   console.log(err.message)
+       res.write(JSON.stringify({
+         result: "error"
+       }));
+    }
 
-  // Work in progress
-
-  // db.run(`INSERT INTO visits(visitID, userID, roomID, startTime) VALUES(?, ?, ?, ?)`, [visitID, username, roomID, startTime], function(err) {
-  //     if (err) {
-  //       console.log(err.message);
-  //       response.write(JSON.stringify({
-  //         result: "failure"
-  //       }));
-  //     }
-  //     else{
-  //       response.write(JSON.stringify({
-  //         result: "success"
-  //       }));
-  //     }
-  //   });
+    if(row == null){
+      res.write(JSON.stringify({
+        result: "failure"
+      }));
+    }
+    else{
+      roomID = row.id;
+      db.run(`INSERT INTO visits(visitID, userID, roomID, startTime) VALUES(?, ?, ?, ?)`, [visitID, username, roomID, startTime], function(err) {
+        if (err) {
+          console.log(err.message);
+          response.write(JSON.stringify({
+            result: "error"
+          }));
+        }
+        else{
+          response.write(JSON.stringify({
+            result: "success"
+          }));
+        }
+      });
+    }
+  });
 
   res.end();
 }
@@ -70,30 +82,41 @@ async function checkInHandler(request, response){
 async function checkOutHandler(request, response){
   console.log("in the checkout handler");
   var username = req.body.username
-  var roomID = req.body.roomId
+  var qrCode = req.body.roomId
   var db = this.db;
   var endTime = new Date()
 
-  response.write(JSON.stringify({
-    result: "success"
-  }));
+  let sql = `SELECT roomID id FROM rooms where qrCode = ?`;
+  db.get(sql, [qrCode], (err, row) => {
+    if (err) {
+       console.log(err.message)
+       res.write(JSON.stringify({
+         result: "error"
+       }));
+    }
 
-
-  // Work in progress
-
-  // db.run(`UPDATE visits SET endTime = ? WHERE userID = ? AND roomID = ? AND endTime IS NULL`, [endTime, username, roomID], function(err) {
-  //   if (err) {
-  //     console.log(err.message);
-  //     response.write(JSON.stringify({
-  //       result: "failure"
-  //     }));
-  //   }
-  //   else{
-  //     response.write(JSON.stringify({
-  //       result: "success"
-  //     }));
-  //   }
-  // });
+    if(row == null){
+      res.write(JSON.stringify({
+        result: "failure"
+      }));
+    }
+    else{
+      roomID = row.id;
+      db.run(`UPDATE visits SET endTime = ? WHERE userID = ? AND roomID = ? AND endTime IS NULL`, [endTime, username, roomID], function(err) {
+        if (err) {
+          console.log(err.message);
+          response.write(JSON.stringify({
+            result: "error"
+          }));
+        }
+        else{
+          response.write(JSON.stringify({
+            result: "success"
+          }));
+        }
+      });
+    }
+  });
 
   res.end();
 }
