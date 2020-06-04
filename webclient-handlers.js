@@ -12,8 +12,8 @@ async function homepageHandler(req, res){
           console.log(tables);
       });
   });
-
-  res.sendFile('./static/index.html', {root: __dirname});
+  res.type('html');
+  res.sendFile('./p3.html', {root: './static'});
 }
 
 exports.homepageHandler = homepageHandler;

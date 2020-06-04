@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link href="StyleSheet.css" rel="stylesheet">
+    <link href="./StyleSheet.css" rel="stylesheet" type="text/css">
+    <script src="./scripts/home.js"></script>
   </head>
-  
+
   <div class="menu">
     <a href="Home.html">Track</a><hr>
     <a href="p2.html">QR Code for Rooms</a><hr>
     <h3>Employee</h3><hr>
   </div>
-  
-  
+
+
   <div class="main">
 
     <!-- Adds employee -->
@@ -21,19 +22,19 @@
 	  <table class="center">
 	    <tr>
 	      <td align="right"><label for="fname">First Name:</label></td>
-	      <td><input type="text" name="fname"><br></td>
+	      <td><input type="text" name="fname" id="fname"><br></td>
 	    </tr>
 	    <tr>
 	      <td align="right"><label for="lname">Last Name:</label></td>
-	      <td><input type="text" name="lname"><br></td>
+	      <td><input type="text" name="lname" id="lname"><br></td>
 	    </tr>
 	    <tr>
 	      <td align="right"><label for="email">Email:</label></td>
-	      <td><input type="text" name="email"><br></td>
+	      <td><input type="text" name="email" id="email"><br></td>
 	    </tr>
 	    <tr>
 	      <td></td>
-	      <td><input type="submit" value="Submit"><br></td>
+	      <td><button type="button" onclick="addEmployee()">Add</button><br></td>
 	    </tr>
 	  </table>
 	</form>
