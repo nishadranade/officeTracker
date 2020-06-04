@@ -16,10 +16,41 @@ async function homepageHandler(req, res){
   res.sendFile('./p3.html', {root: './static'});
 }
 
+async function addEmployeeHandler(req, res){
+  var db = this.db;
+  console.log("Req: " + req.data);
+  var firstName = req.body.fname;
+  var lastName = req.body.lname;
+  var email = req.body.email;
+  var userID = firstName + "." + lastName
+  var addEmployeeSql =`INSERT INTO users (userID, firstName, lastName, email) VALUES(?, ?, ?, ?)`;
+  await db.run(addEmployeeSql, [userID, firstName, lastName, email] , function(err) {
+    if (err) {
+      console.log(err.message);
+      res.write(JSON.stringify({
+        result: "error"
+      }));
+    }
+    else{
+      console.log("Employee registered Successfully!\n" +
+        "UserID: " + userID, "\nFirstName: " + firstName + "\nLastName: "+ lastName +
+        "\nEmail: " + email);
+      res.write(JSON.stringify({
+          result: "success"
+      }));
+    }
+  });
+}
+
+async function getEmployeeHandler(req, res){
+
+}
+
 async function trackpageHandler(req, res){
-  res.type('html');
-  res.sendFile('./Home.html', {root: './static'});
+
 }
 
 exports.homepageHandler = homepageHandler;
-exports.trackpageHandler = trackpageHandler
+exports.addEmployeeHandler = addEmployeeHandler;
+exports.getEmployeeHandler = getEmployeeHandler;
+exports.trackpageHandler = trackpageHandler;
