@@ -28,3 +28,19 @@ async function addEmployee() {
     alert("Employee successfully added");
   }
 }
+
+async function getEmployee() {
+  var email = document.getElementById('email2').value;
+
+  const resp = await postData("http://localhost:8080/getEmployee", {"email": email });
+  const respJson = await resp.json();
+
+  // { result: "success", fname: "nishad", lname"ranade", email:"nishad.ranade"}
+
+  if( respJson.result == "success"){
+    document.getElementById('fname3').innerHTML = respJson.fname;
+    document.getElementById('lname3').innerHTML = respJson.lname;
+    document.getElementById('email3').innerHTML = respJson.email;
+    document.getElementById("invisibleDiv").style.display = "block";
+  }
+}

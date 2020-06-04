@@ -1,13 +1,111 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link href="./StyleSheet.css" rel="stylesheet" type="text/css">
+    <meta charset="utf-8"/>
+    <!-- <link rel="stylesheet" href="StyleSheet.css" type="text/css"> -->
     <script src="./scripts/home.js"></script>
+    <style>
+    * {
+        margin: 0;
+    }
+
+    html, body {
+        height: 100%;
+        width: 100%;
+
+        font-family: Arial;
+    }
+
+    .menu {
+        height: 100%;
+        width: 25%;
+
+        top: 0;
+        left: 0;
+
+        background-color: #f1f1f1;
+        float: left;
+    }
+
+    .menu a {
+        display: block;
+        font-size: 32px;
+        padding: 30px 12px 30px 36px;
+        text-decoration: none;
+    }
+
+    .menu a:hover {
+        font-weight: bold;
+        background-color: #ddd;
+    }
+
+    h3 {
+        font-size: 32px;
+        padding: 30px 12px 30px 36px;
+        background-color:#d8d8d8;
+    }
+
+    .main {
+        width:75%;
+
+        display: inline-block;
+        float: left;
+        font-size: 24px;
+        padding-top: 60px;
+        text-align: center;
+    }
+
+    .main_lower {
+        margin-top: 96px;
+    }
+
+    .bigButton {
+        font-size: 32px;
+    }
+
+    .bigButton:active {
+        background: #ddd;
+        outline: none;
+    }
+
+    #addEmployee {
+        width: 100%;
+
+        display: none;
+        margin-top: 24px;
+    }
+
+    #empDetails {
+        width: 100%;
+
+        display: none;
+        margin-top: 24px;
+    }
+
+    #addRoom {
+        width: 100%;
+
+        display: none;
+        margin-top: 24px;
+    }
+
+    #getQR {
+        width: 100%;
+
+        display: none;
+        margin-top: 24px;
+    }
+
+    table.center {
+      margin-left: 33%;
+    }
+
+    </style>
   </head>
 
   <div class="menu">
-    <a href="Home.html">Track</a><hr>
-    <a href="p2.html">QR Code for Rooms</a><hr>
+    <a href="http://localhost:8080/track">Track</a><hr>
+    <a href="http://localhost:8080/qrcode">QR Code for Rooms</a><hr>
     <h3>Employee</h3><hr>
   </div>
 
@@ -45,10 +143,40 @@
     <div class="main_lower">
       <button class="bigButton" onClick="display('empDetails')">Get Employee Details</button>
       <div id="empDetails"> <!-- TODO -->
-	Boo!
+        <form> <!-- TODO -->
+          <table class="center">
+            <tr>
+              <td align="right"><label for="fname">Email:</label></td>
+              <td><input type="text" name="fname" id="email2"><br></td>
+            </tr>
+            <tr>
+      	      <td></td>
+      	      <td><button type="button" onclick="getEmployee()">Search</button><br></td>
+      	    </tr>
+          </table>
+        </form>
       </div>
     </div>
+
+    <div style="display:none;" id="invisibleDiv">
+      <table class="center">
+        <tr>
+          <td align="right"><label for="fname">First Name:</label></td>
+          <td><span id="fname3"></span><br></td>
+        </tr>
+        <tr>
+          <td align="right"><label for="fname">Last Name:</label></td>
+          <td><span id="lname3"></span><br></td>
+        </tr>
+        <tr>
+          <td align="right"><label for="fname">Email:</label></td>
+          <td><span id="email3"></span><br></td>
+        </tr>
+      </table>
+    </div>
   </div>
+
+
 
   <script>
     function display(id) {

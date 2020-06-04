@@ -37,11 +37,25 @@ class Server {
 
     // this.server.get('/', android.trialHandler.bind(this));
     this.server.get('/home/', web.homepageHandler.bind(this));
+    this.server.get('/track/', web.trackpageHandler.bind(this));
+    this.server.get('/qrcode/', (req, res) => {
+      res.type('html');
+      res.sendFile('./p2.html', {root: './static'});
+    });
 
     // add employee dummy script
-    this.router.post('/addEmployee', function(req, res){
+    this.router.post('/addEmployee', web.addEmployeeHandler.bind(this));
+    this.router.post('/getEmployee', web.getEmployeeHandler.bind(this));
+    this.router.post('/getRoomID', (req, res) => {
       res.write(JSON.stringify({
-          result: "success"
+        result:"success",
+        roomID: 111}));
+      res.end();
+    });
+
+    this.router.post('/addRoom', (req, res) => {
+      res.write(JSON.stringify({
+        result: "success"
       }));
       res.end();
     });

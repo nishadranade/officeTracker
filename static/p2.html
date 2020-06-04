@@ -1,13 +1,111 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link href="StyleSheet.css" rel="stylesheet">
+    <!-- <link href="StyleSheet.css" rel="stylesheet"> -->
+    <script src="./scripts/qrcode.js"></script>
+    <style>
+    * {
+        margin: 0;
+    }
+
+    html, body {
+        height: 100%;
+        width: 100%;
+
+        font-family: Arial;
+    }
+
+    .menu {
+        height: 100%;
+        width: 25%;
+
+        top: 0;
+        left: 0;
+
+        background-color: #f1f1f1;
+        float: left;
+    }
+
+    .menu a {
+        display: block;
+        font-size: 32px;
+        padding: 30px 12px 30px 36px;
+        text-decoration: none;
+    }
+
+    .menu a:hover {
+        font-weight: bold;
+        background-color: #ddd;
+    }
+
+    h3 {
+        font-size: 32px;
+        padding: 30px 12px 30px 36px;
+        background-color:#d8d8d8;
+    }
+
+    .main {
+        width:75%;
+
+        display: inline-block;
+        float: left;
+        font-size: 24px;
+        padding-top: 60px;
+        text-align: center;
+    }
+
+    .main_lower {
+        margin-top: 96px;
+    }
+
+    .bigButton {
+        font-size: 32px;
+    }
+
+    .bigButton:active {
+        background: #ddd;
+        outline: none;
+    }
+
+    #addEmployee {
+        width: 100%;
+
+        display: none;
+        margin-top: 24px;
+    }
+
+    #empDetails {
+        width: 100%;
+
+        display: none;
+        margin-top: 24px;
+    }
+
+    #addRoom {
+        width: 100%;
+
+        display: none;
+        margin-top: 24px;
+    }
+
+    #getQR {
+        width: 100%;
+
+        display: none;
+        margin-top: 24px;
+    }
+
+    table.center {
+      margin-left: 33%;
+    }
+
+    </style>
   </head>
-  
+
   <div class="menu">
-    <a href="Home.html">Track</a><hr>
+    <a href="http://localhost:8080/track">Track</a><hr>
     <h3>QR Code for Rooms</h3><hr>
-    <a href="p3.html">Employee</a><hr>
+    <a href="http://localhost:8080/home">Employee</a><hr>
   </div>
 
 
@@ -17,21 +115,30 @@
       <div id="addRoom">
 	<form> <!-- TODO -->
 	  <label for="rname">Enter Room Name:</label>
-	  <input type="text" name="rname">
-	  <input type="submit" value="Submit">
+	  <input type="text" name="rname" id="rname1">
+	  <button type="button" onclick="addRoom()">Add</button>
 	</form>
       </div>
     </div>
     <div class="main_lower">
       <button class="bigButton" onClick="display('getQR')">Generate QR Code</button>
       <div id="getQR">
-	<form> <!-- TODO -->
+	<form>
 	  <label for="rname">Select Room Name:</label>
-	  <input type="text" name="rname">
-	  <input type="submit" value="Submit">
+	  <input type="text" name="rname" id="rname">
+	  <button type="button" onclick="genCode()">Generate</button>
 	</form>
-      </div>
-    </div>
+  <br><br><br>
+  <div style="display:none;" id="imageDiv">
+    <img id="image" src=""/>
+    <br>
+    <button type="button" id="print" onclick="printQR()">Print</button>
+  </div>
+
+
+
+  </div>
+</div>
   </div>
 
   <script>
@@ -40,5 +147,5 @@
 	x.style.display = (x.style.display=="none" || x.style.display=="") ? "block" : "none";
     }
   </script>
-  
+
 </html>

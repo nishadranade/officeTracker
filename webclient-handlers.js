@@ -16,4 +16,20 @@ async function homepageHandler(req, res){
   res.sendFile('./p3.html', {root: './static'});
 }
 
+async function trackpageHandler(req, res){
+  res.type('html');
+  res.sendFile('./Home.html', {root: './static'});
+}
+
+async function addEmployeeHandler(req, res){
+
+}
+
+async function getEmployeeHandler(req, res){
+  
+}
+
 exports.homepageHandler = homepageHandler;
+exports.trackpageHandler = trackpageHandler
+exports.addEmployeeHandler = addEmployeeHandler;
+exports.getEmployeeHandler = getEmployeeHandler;
