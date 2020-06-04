@@ -8,9 +8,10 @@ const web = require('./webclient-handlers');
 
 class Server {
 
-  constructor(){
+  constructor(db){
     this.server = express();
     this.port = process.env.PORT || 8080;
+    this.db = db;
 
     this.listen = function (port) {
       return this.server.listen(port);
