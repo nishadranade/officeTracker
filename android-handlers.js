@@ -6,11 +6,11 @@ const http = require('http');
 
 async function loginHandler(req, res){
 
-  console.log("attempt at logging in");
-  console.log(username);
-
   var username = req.body.username;
   var db = this.db;
+  
+  console.log("attempt at logging in");
+  console.log(username);
 
   let sql = `SELECT userID id FROM users where userID = ?`;
   db.get(sql, [username], (err, row) => {
@@ -25,15 +25,17 @@ async function loginHandler(req, res){
       res.write(JSON.stringify({
         result: "failure"
       }));
+	  res.end();
     }
     else{
       res.write(JSON.stringify({
         result: "success"
       }));
+	  res.end();
     }
   });
 
-  res.end();
+  
 }
 
 async function checkInHandler(req, res){
@@ -74,9 +76,11 @@ async function checkInHandler(req, res){
         }
       });
     }
+	
+	res.end();
   });
 
-  res.end();
+  
 }
 
 async function checkOutHandler(req, res){
@@ -116,9 +120,10 @@ async function checkOutHandler(req, res){
         }
       });
     }
+	
+	res.end();
   });
 
-  res.end();
 }
 
 function generateID (){
