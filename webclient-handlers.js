@@ -36,14 +36,48 @@ async function addEmployeeHandler(req, res){
         "UserID: " + userID, "\nFirstName: " + firstName + "\nLastName: "+ lastName +
         "\nEmail: " + email);
       res.write(JSON.stringify({
-          result: "success"
+          result: "success",
+          userID: userID,
+          firstName: firstName,
+          lastName: lastName,
+          email: email
       }));
+      res.end();
     }
   });
 }
 
 async function getEmployeeHandler(req, res){
+  var db = this.db;
+  var email = req.body.email;
+  var getEmployeeSql = `SELECT * FROM users WHERE email = ?`;
+  await db.get(getEmployeeSql, [email], (err, row) => {
+    if (err) {
+      console.log(err.message);
+      res.write(JSON.stringify({
+        result: "error"
+      }));
+    }
 
+    if(row == null){
+      res.write(JSON.stringify({
+        result: "failure"
+      }));
+     }
+     else{
+       console.log("Successfully accessed employee data\n" +
+         "UserID: " + row.userID, "\nFirstName: " + row.firstName + "\nLastName: "+ row.lastName +
+         "\nEmail: " + row.email);
+       res.write(JSON.stringify({
+         result: "success",
+         userID: row.userID,
+         fname: row.firstName,
+         lname: row.lastName,
+         email: row.email
+       }));
+       res.end();
+      }
+});
 }
 
 async function trackpageHandler(req, res){

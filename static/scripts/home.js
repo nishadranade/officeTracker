@@ -25,7 +25,12 @@ async function addEmployee() {
   const resp = await postData("http://localhost:8080/addEmployee", data );
   const respJson = await resp.json();
   if( respJson.result == "success"){
-    alert("Employee successfully added");
+    alert("Employee successfully added:" +
+    "\nUserID: " + respJson.userID + "\nFirstName: " + respJson.firstName + "\nLastName: "+ respJson.lastName +
+    "\nEmail: " + respJson.email);
+  }
+  else{
+    alert("An error has occurred. Please check if the employee already exists.");
   }
 }
 
