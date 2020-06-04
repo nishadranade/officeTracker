@@ -17,12 +17,18 @@ class Server {
       return this.server.listen(port);
     }
     this.router = express.Router();
-    this.router.use((request, resposne, next) => {
+    this.router.use((request, response, next) => {
       response.header('Content-Type', 'application/json');
       response.header('Access-Control-Allow-Origin', '*');
       response.header('Access-Control-Allow-Headers', '*');
       next();
     });
+
+    // Android related URLs
+    this.router.post('/login', android.loginHandler.bind(this));
+    this.router.post('/checkIn', android.checkInHandler.bind(this));
+    this.router.post('/checkOut', android.checkOutHandler.bind(this));
+    
 
     // this.server.get('/', android.trialHandler.bind(this));
     this.server.get('/', web.homepageHandler.bind(this));
