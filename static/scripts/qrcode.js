@@ -26,7 +26,7 @@ async function addRoom(){
   const resp = await postData(URL + 'addRoom/', {rname: rname});
   const respJson = await resp.json();
   if(respJson.result == "success"){
-    alert("Room added successfully");
+    alert("Room: " + respJson.name + " added successfully! " + respJson.message);
   }
 }
 

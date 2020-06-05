@@ -37,10 +37,7 @@ class Server {
 
     // this.server.get('/', android.trialHandler.bind(this));
     this.server.get('/home/', web.homepageHandler.bind(this));
-    this.server.get('/track/', (req, res) => {
-      res.type('html');
-      res.sendFile('./Home.html', {root: './static'});
-    });
+    this.server.get('/track/', web.trackpageHandler.bind(this));
     this.server.get('/qrcode/', (req, res) => {
       res.type('html');
       res.sendFile('./p2.html', {root: './static'});
@@ -49,21 +46,11 @@ class Server {
     // add employee dummy script
     this.router.post('/addEmployee', web.addEmployeeHandler.bind(this));
     this.router.post('/getEmployee', web.getEmployeeHandler.bind(this));
-    this.router.post('/getRoomID', (req, res) => {
-      res.write(JSON.stringify({
-        result:"success",
-        roomID: 111}));
-      res.end();
-    });
+    this.router.post('/addRoom',web.addRoomHandler.bind(this));
+    this.router.post('/getRoomID',web.getRoomIDHandler.bind(this));
+    this.router.post('/getData',web.trackDataHandler.bind(this));
 
-    this.router.post('/addRoom', (req, res) => {
-      res.write(JSON.stringify({
-        result: "success"
-      }));
-      res.end();
-    });
-
-    // replace the anonymous function that sends dummy data with trackPageHandler
+	  // replace the anonymous function that sends dummy data with trackPageHandler
     this.router.post('/getData', (req, res) => {
       res.write(JSON.stringify({
         result: "success",

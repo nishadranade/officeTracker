@@ -66,7 +66,7 @@ async function getEmployeeHandler(req, res){
      }
      else{
        console.log("Successfully accessed employee data\n" +
-         "UserID: " + row.userID, "\nFirstName: " + row.firstName + "\nLastName: "+ row.lastName +
+         "UserID: " + row.userID + "\nFirstName: " + row.firstName + "\nLastName: "+ row.lastName +
          "\nEmail: " + row.email);
        res.write(JSON.stringify({
          result: "success",
@@ -84,7 +84,126 @@ async function trackpageHandler(req, res){
 
 }
 
+async function addRoomHandler(req, res){
+  var db = this.db;
+  var roomName = req.body.rname;
+  var roomID = generateID();
+  var addRoomSql = `INSERT INTO rooms (roomID, qrCode, roomName)	VALUES (?, ?, ?)`;
+  await db.run(addRoomSql, [roomID, roomID, roomName], (err, row) => {
+    if (err) {
+      console.log(err.message);
+      res.write(JSON.stringify({
+        result: "error"
+      }));
+    }
+    else{
+      console.log("Successfully added room!\n" +
+        "roomName: " + roomName);
+      res.write(JSON.stringify({
+        result: "success",
+        message: "For QR code, use \"Generate QR code\" Option",
+        name: roomName
+      }));
+      res.end();
+    }
+});
+
+}
+
+async function getRoomIDHandler(req, res){
+  var db = this.db;
+  var roomName = req.body.rname;
+  var selectRoomByNameSql = `SELECT roomID FROM rooms WHERE roomName = ?`;
+  await db.get(selectRoomByNameSql, [roomName], (err, row) => {
+    if (err) {
+      console.log(err.message);
+      res.write(JSON.stringify({
+        result: "error"
+      }));
+    }
+
+    if(row == null){
+      res.write(JSON.stringify({
+        result: "failure"
+      }));
+     }
+     else{
+       console.log("Successfully accessed room ID\n" +
+         "RoomID: " + row.roomID);
+       res.write(JSON.stringify({
+         result: "success",
+         roomID: row.roomID
+       }));
+       res.end();
+      }
+  });
+}
+
+async function trackDataHandler(req, res){
+  var db = this.db;
+  var firstName = req.body.name.split(" ")[0]
+  var lastName = req.body.name.split(" ")[1];
+  var userID = firstName + "." + lastName;
+  userID = userID.toLowerCase();
+  var startDate = req.body.startDate;
+  var endDate = req.body.endDate;
+
+  var trackDataSql = `select u.userID as userID, r.roomName as roomName,
+  v.startTime as startTime, v.endTime as endTime from visits v
+    join users u on v.userID = u.userID
+    join rooms r on v.roomID = r.roomID
+    where ((v.startTime between ? and ?) or (v.endTime between ? and ?))
+    and r.roomID in
+    (
+    select distinct vEmp.roomID from visits vEmp
+    join users uEmp on vEmp.userID = uEmp.userID
+    where ((vEmp.startTime between ? and ?) or (vEmp.endTime between ? and ?))
+    and uEmp.userID = ?
+    )`;
+  var logSet = new Set();
+  var empLogs = []
+  await db.each(trackDataSql, [startDate, endDate, startDate, endDate,
+      startDate, endDate, startDate, endDate, userID], (err, row) => {
+    if (err) {
+      console.log(err.message);
+      res.write(JSON.stringify({
+        result: "error"
+      }));
+    }
+    else{
+      logSet.add([row.roomName, row.startTime, row.endTime])
+      empLogs.push([row.userID, row.roomName, row.startTime, row.endTime])
+    }
+  });
+
+  var logs;
+  logSet.forEach((item, i) => {
+    logs.push(item);
+  });
+
+  await console.log("Successfully tracked data for " + req.body.name);
+  await res.write(JSON.stringify({
+    result: "success",
+    logs: logs,
+    empLogs: empLogs
+  }));
+  res.end();
+}
+
+function generateID (){
+  let ALPHABET = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  let ID_LENGTH = 8;
+  var rtn = '';
+    for (var i = 0; i < ID_LENGTH; i++) {
+      rtn += ALPHABET.charAt(Math.floor(Math.random() * ALPHABET.length));
+    }
+    return rtn;
+}
+
 exports.homepageHandler = homepageHandler;
 exports.addEmployeeHandler = addEmployeeHandler;
 exports.getEmployeeHandler = getEmployeeHandler;
 exports.trackpageHandler = trackpageHandler;
+exports.addRoomHandler = addRoomHandler;
+exports.getRoomIDHandler = getRoomIDHandler;
+exports.trackDataHandler = trackDataHandler;
