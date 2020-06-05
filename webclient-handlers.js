@@ -145,8 +145,12 @@ async function trackDataHandler(req, res){
   var lastName = req.body.name.split(" ")[1];
   var userID = firstName + "." + lastName;
   userID = userID.toLowerCase();
-  var startDate = req.body.startDate;
-  var endDate = req.body.endDate;
+  var startDate = req.body.startTime;
+  var endDate = req.body.endTime;
+
+  console.log(userID);
+  console.log(startDate);
+  console.log(endDate);
 
   var trackDataSql = `select u.userID as userID, r.roomName as roomName,
   v.startTime as startTime, v.endTime as endTime from visits v
@@ -164,6 +168,10 @@ async function trackDataHandler(req, res){
   var empLogs = []
   await db.each(trackDataSql, [startDate, endDate, startDate, endDate,
       startDate, endDate, startDate, endDate, userID], (err, row) => {
+
+    if(row == null){
+      console.log("No rows were found.");
+    }
     if (err) {
       console.log(err.message);
       res.write(JSON.stringify({
@@ -171,17 +179,24 @@ async function trackDataHandler(req, res){
       }));
     }
     else{
-      logSet.add([row.roomName, row.startTime, row.endTime])
-      empLogs.push([row.userID, row.roomName, row.startTime, row.endTime])
+      console.log("Added to logs and empLogs!" + row.roomName + " " + row.startTime
+      + " " + row.endTime + " " + row.userID);
+      logSet.add([row.roomName, row.startTime, row.endTime]);
+      empLogs.push([row.userID, row.roomName, row.startTime, row.endTime]);
     }
   });
 
   var logs;
-  logSet.forEach((item, i) => {
-    logs.push(item);
-  });
+  logs = Array.from(logSet);
+  // logSet.forEach((item, i) => {
+  //   logs.push(item);
+  // });
 
-  await console.log("Successfully tracked data for " + req.body.name);
+  console.log("Here");
+  console.log(logs);
+  console.log(empLogs);
+
+  console.log("Successfully tracked data for " + req.body.name);
   await res.write(JSON.stringify({
     result: "success",
     logs: logs,

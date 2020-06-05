@@ -54,14 +54,14 @@ class Server {
     this.router.post('/getData',web.trackDataHandler.bind(this));
 
 	  // replace the anonymous function that sends dummy data with trackPageHandler
-    this.router.post('/getData', (req, res) => {
-      res.write(JSON.stringify({
-        result: "success",
-        logs: [["Cambridge", "2020-06-04 09:00:00.000","2020-06-04 10:00:00.000"], ["Boston", "2020-06-04 09:00:00.000","2020-06-04 10:00:00.000"]],
-        empLogs: [["andrew", "Cambridge", "2020-06-04 09:00:00.000","2020-06-04 10:00:00.000"], ["ayush", "Boston", "2020-06-04 09:00:00.000", "2020-06-04 10:00:00.000"]]
-      }));
-      res.end();
-    })
+    // this.router.post('/getData', (req, res) => {
+    //   res.write(JSON.stringify({
+    //     result: "success",
+    //     logs: [["Cambridge", "2020-06-04 09:00:00.000","2020-06-04 10:00:00.000"], ["Boston", "2020-06-04 09:00:00.000","2020-06-04 10:00:00.000"]],
+    //     empLogs: [["andrew", "Cambridge", "2020-06-04 09:00:00.000","2020-06-04 10:00:00.000"], ["ayush", "Boston", "2020-06-04 09:00:00.000", "2020-06-04 10:00:00.000"]]
+    //   }));
+    //   res.end();
+    // })
   }
 }
 
