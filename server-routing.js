@@ -37,7 +37,10 @@ class Server {
 
     // this.server.get('/', android.trialHandler.bind(this));
     this.server.get('/home/', web.homepageHandler.bind(this));
-    this.server.get('/track/', web.trackpageHandler.bind(this));
+    this.server.get('/track/', (req, res) => {
+      res.type('html');
+      res.sendFile('./Home.html', {root: './static'});
+    });
     this.server.get('/qrcode/', (req, res) => {
       res.type('html');
       res.sendFile('./p2.html', {root: './static'});
