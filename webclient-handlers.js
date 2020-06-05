@@ -166,43 +166,45 @@ async function trackDataHandler(req, res){
     )`;
   var logSet = new Set();
   var empLogs = []
-  await db.each(trackDataSql, [startDate, endDate, startDate, endDate,
-      startDate, endDate, startDate, endDate, userID], (err, row) => {
+  await db.all(trackDataSql, [startDate, endDate, startDate, endDate,
+      startDate, endDate, startDate, endDate, userID], (err, rows) => {
 
-    if(row == null){
-      console.log("No rows were found.");
-    }
-    if (err) {
-      console.log(err.message);
-      res.write(JSON.stringify({
-        result: "error"
-      }));
-    }
-    else{
-      console.log("Added to logs and empLogs!" + row.roomName + " " + row.startTime
-      + " " + row.endTime + " " + row.userID);
-      logSet.add([row.roomName, row.startTime, row.endTime]);
-      empLogs.push([row.userID, row.roomName, row.startTime, row.endTime]);
-    }
-  });
+    rows.forEach((row) => {
+      if (err) {
+        console.log(err.message);
+        res.write(JSON.stringify({
+          result: "error"
+        }));
+      }
+      if(row == null){
+        console.log("No rows were found.");
+      }
+      else if(userID != row.userID){
+        console.log("Added to logs and empLogs!" + row.roomName + " " + row.startTime
+        + " " + row.endTime + " " + row.userID);
+        logArray = [row.roomName, row.startTime, row.endTime]
+        if(!logSet.has(JSON.stringify(logArray))){
+          logSet.add(JSON.stringify(logArray));
+        }
+        empLogs.push([row.userID, row.roomName, row.startTime, row.endTime]);
+      }
+    });
+    var logs = [];
+    logSet.forEach((item, i) => {
+      logs.push(JSON.parse(item));
+    });
+    
+    console.log(logs);
+    console.log(empLogs);
 
-  var logs;
-  logs = Array.from(logSet);
-  // logSet.forEach((item, i) => {
-  //   logs.push(item);
-  // });
-
-  console.log("Here");
-  console.log(logs);
-  console.log(empLogs);
-
-  console.log("Successfully tracked data for " + req.body.name);
-  await res.write(JSON.stringify({
-    result: "success",
-    logs: logs,
-    empLogs: empLogs
-  }));
-  res.end();
+    console.log("Successfully tracked data for " + req.body.name);
+    res.write(JSON.stringify({
+      result: "success",
+      logs: logs,
+      empLogs: empLogs
+    }));
+    res.end();
+  })
 }
 
 function generateID (){
