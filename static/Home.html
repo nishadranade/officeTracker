@@ -98,8 +98,24 @@
     table.center {
       margin-left: 33%;
     }
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
 
     </style>
+    <script src="./scripts/track.js"></script>
   </head>
 
   <body>
@@ -115,23 +131,31 @@
 	<!-- Search employee and filter by time -->
 	<h4>Lookup</h4><br>
 	<form>
-	  <label for="name">name:</label>
-	  <input type="text" name="name">
+	  <label for="name">Name:</label>
+	  <input type="text" name="name" id="email">
 
-	  <label for="start time">start time:</label>
-	  <input type="time" name="start time">
+	  <label for="startDate">Start Date:</label>
+	  <input type="date" name="startDate" id="startDate">
 
-	  <label for="start time">end time:</label>
-	  <input type="time" name="end time">
+	  <label for="starttime">End Date:</label>
+	  <input type="date" name="endDate" id="endDate">
 
-	  <input type="submit" value="Submit">
+	  <button type="button" onclick="getData()">Track</button>
 	</form>
       </div>
 
+    <br><br><br>
+
       <!-- TODO: Load employee info -->
-      <div class="main_lower">
-	Hello world. I wonder where this text is placed.
-      </div>
+  <div>
+    <table id="logsTable"></table>
+
+    <br><br>
+
+    <table id="empTable"></table>
+
+  </div>
+
     </div>
 
   </body>
