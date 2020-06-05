@@ -63,6 +63,7 @@ class Server {
       res.end();
     });
 
+    // replace the anonymous function that sends dummy data with trackPageHandler
     this.router.post('/getData', (req, res) => {
       res.write(JSON.stringify({
         result: "success",
