@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">OfficeTracker</string>
+    <string name="check_in">Check In</string>
+    <string name="button">Button</string>
+    <string name="textview">TextView</string>
+    <string name="Room_id">\@string/RoomId</string>
+    <string name="room_id">Room Id</string>
+    <string name="checkin">checkIn</string>
+    <string name="checkout">CheckOut</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_token">Login Token</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid token</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="base_url">http://10.0.0.87:8080</string>
+    <string name="username_json_key">username</string>
+    <string name="user_token_key">userTokenInSharedPreferences</string>
+    <string name="shared_pref_file">officetracker</string>
+    <string name="is_check_in_key">checkintomeeting</string>
+    <string name="room_id_key">roomIdInSharedPreferences</string>
+</resources>
