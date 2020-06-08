@@ -53,13 +53,13 @@ It's fast, easy to use, and can increase employee safety on return to office.
 
 2. To set up the Web App, ensure that you have **node** and **node package manager (npm)** installed on your machine.
 
-3. Navigate to the Web App directory, which is **/gitone/officeTracker/**, and do: **npm install**. This should fetch all **npm** dependencies.
+3. Navigate to the Web App directory, which is **/gitone/officeTracker/WebApp**, and do: **npm install**. This should fetch all **npm** dependencies.
 
 4. From the same directory, execute: **node server-main.js** to start the server, and go to **http://localhost:8080/home/** in your browser to access the web client.
 
 5. For the Android app, ensure you have **Android Studio** installed on your machine.
 
-6. Open the **/gitone/AndroidApp/** directory in Android Studio, and wait for it to build.
+6. Open the **/gitone/officeTracker/AndroidApp/** directory in Android Studio, and wait for it to build.
 
 7. Update the **base_url** field in the **/gitone/AndroidApp/app/src/main/res/values/strings.xml** file and put the IP-address **http://localhost:8080/home/** in it.
 
