@@ -2,6 +2,8 @@
 
 # Solution Name - *Office Tracker*
 
+**Deployed at https://officetracker.herokuapp.com/home**
+
 # Solution Description
 Allow employees in a post covid office to find out if they may be at risk based on concurrent
 presence in meetings.
@@ -46,7 +48,7 @@ It's fast, easy to use, and can increase employee safety on return to office.
 * Better User Experience and higher security
 * Add support for advanced methods for determining exposure/risk for employees.
 
-# Setup Instructions -
+# Setup Instructions (Local) -
 1. Clone the Bitbucket repo: **git clone https://bitbucket.fis.dev/projects/INNO20R/repos/gitone.git**
 
 2. To set up the Web App, ensure that you have **node** and **node package manager (npm)** installed on your machine.
