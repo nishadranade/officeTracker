@@ -49,7 +49,7 @@ It's fast, easy to use, and can increase employee safety on return to office.
 * Add support for advanced methods for determining exposure/risk for employees.
 
 # Setup Instructions (Local) -
-1. Clone the Bitbucket repo: **git clone https://bitbucket.fis.dev/projects/INNO20R/repos/gitone.git**
+1. Clone the Bitbucket repo: **git clone https://github.com/nishadranade/officeTracker.git**
 
 2. To set up the Web App, ensure that you have **node** and **node package manager (npm)** installed on your machine.
 
